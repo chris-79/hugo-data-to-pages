@@ -1,0 +1,8 @@
+{
+  "root": "../",
+  "dataFolder": "data",
+  "type": "person",
+  "pages": "people",
+  "contentPath": "content",
+  "hugoPath": "/usr/local/bin/hugo"
+}
