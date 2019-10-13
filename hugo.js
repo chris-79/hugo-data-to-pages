@@ -41,7 +41,7 @@ const build = async (add, force) => {
       if (!pages[j].path) return console.log('Error: Pages must include path!');
       if (!pages[j].fields) return console.log('Error: Pages must include fields!');
       if (!pages[j].fields.type) pages[j].fields.type = config.type;
-      
+
       const pagePath = config.root + config.contentPath + '/' + pages[j].path;
       if (add) {
         fse.ensureDirSync(pagePath);
@@ -56,7 +56,7 @@ const build = async (add, force) => {
             message: 'Delete ' + pagePath + ' ?'
           });
         }
- 
+
         if (force || response.value) {
           fse.removeSync(pagePath);
           console.log('Removed folder: ' + pagePath);
@@ -98,7 +98,7 @@ const main = async (argvs) => {
     console.log('Building data-generated files...');
     await build();
     console.log('Running Hugo (build)...');
-    await execSync('(cd ' + config.root + ' && ' + config.hugoPath + ')');
+    await execSync('(cd ' + config.root + ' && ' + config.hugoPath + ' --minify)');
     console.log('Removing data-generated files...');
     await build(false, force);
   }
