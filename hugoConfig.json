@@ -1,5 +1,5 @@
 {
-  "root": "../",
+  "root": "..",
   "dataFolder": "data",
   "type": "person",
   "pages": "people",
