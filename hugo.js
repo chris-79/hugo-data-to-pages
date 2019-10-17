@@ -115,8 +115,6 @@ const main = async (argvs) => {
     } catch (e) {
       console.log('Hugo failed 😞');
       console.log(e);
-      console.log('Removing data-generated files...');
-      await build(false, force);
     }
   }
 
