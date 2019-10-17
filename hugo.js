@@ -104,7 +104,7 @@ const main = async (argvs) => {
     }
     console.log('Running Hugo (build)...');
     try {
-      await execSync('(cd ' + config.root + ' && ' + config.hugoPath + ' --minify)');
+      await execSync('(hugo --minify)');
     } catch (e) {
       console.log('Hugo failed 😞');
       console.log(e);
