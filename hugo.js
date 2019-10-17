@@ -88,7 +88,12 @@ const main = async (argvs) => {
   } else if (mode === 'generate') {
     //generate - just create data-generated files (no hugo running, and no removal)
     console.log('Building data-generated files...');
-    await build();
+    try {
+      await build();
+    } catch (e) {
+      console.log('Build failed 😞');
+      console.log(e);
+    }
   } else if (mode === 'clean') {
     //clean - just remove data-generated files
     console.log('Removing data-generated files...');
