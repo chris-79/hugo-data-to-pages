@@ -96,9 +96,19 @@ const main = async (argvs) => {
   } else {
     //default behavior - create data-generated files, run hugo build, remove data-generated files
     console.log('Building data-generated files...');
-    await build();
+    try {
+      await build();
+    } catch (e) {
+      console.log('Build failed 😞');
+      console.log(e);
+    }
     console.log('Running Hugo (build)...');
-    await execSync('(cd ' + config.root + ' && ' + config.hugoPath + ' --minify)');
+    try {
+      await execSync('(cd ' + config.root + ' && ' + config.hugoPath + ' --minify)');
+    } catch (e) {
+      console.log('Hugo failed 😞');
+      console.log(e);
+    }
     console.log('Removing data-generated files...');
     await build(false, force);
   }
