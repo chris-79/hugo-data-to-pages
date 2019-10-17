@@ -109,7 +109,7 @@ const main = async (argvs) => {
     }
     console.log('Running Hugo (build)...');
     try {
-      await execSync('hugo --minify');
+      await execSync('(cd ' + config.root + ' && ' + config.hugoPath + ' --minify)');
       console.log('Removing data-generated files...');
       await build(false, force);
     } catch (e) {
