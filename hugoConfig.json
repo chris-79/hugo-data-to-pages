@@ -2,7 +2,7 @@
   "root": ".",
   "dataFolder": "data",
   "type": "person",
-  "pages": "people",
+  "pages": ["people"],
   "contentPath": "content",
   "hugoPath": "hugo"
 }

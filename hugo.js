@@ -34,31 +34,32 @@ const build = async (add, force) => {
   }
   if (dataFiles.length < 1) return console.log('No data files');
   for (let i in dataFiles) {
-    let data = converToObject(dataFiles[i]);
-    let pages = config.pages ? data[config.pages] : data;
-    for (let j in pages) {
-      if (!pages[j].path) return console.log('Error: Pages must include path!');
-      if (!pages[j].fields) return console.log('Error: Pages must include fields!');
-      if (!pages[j].fields.type) pages[j].fields.type = config.type;
+    if (dataFiles[i].includes(config.pages)) {
+      let pages = converToObject(dataFiles[i]);
+      for (let j in pages) {
+        if (!pages[j]) return console.log('Error: Pages must include fields!');
+        if (!pages[j].slug) return console.log('Error: Pages must include slug!');
+        if (!pages[j].type) pages[j].type = config.type;
 
-      const pagePath = config.root + config.contentPath + '/' + pages[j].path;
-      if (add) {
-        fse.ensureDirSync(pagePath);
-        fs.writeFileSync(pagePath + '/index.md', JSON.stringify(pages[j].fields) + '\n');
-        console.log('Created file: ' + pagePath + '/index.md');
-      } else if (fs.existsSync(pagePath)) {
-        let response;
-        if (!force) {
-          response = await prompts({
-            type: 'confirm',
-            name: 'value',
-            message: 'Delete ' + pagePath + ' ?'
-          });
-        }
+        const pagePath = config.root + config.contentPath + '/' + pages[j].slug;
+        if (add) {
+          fse.ensureDirSync(pagePath);
+          fs.writeFileSync(pagePath + '/index.md', JSON.stringify(pages[j]) + '\n');
+          console.log('Created file: ' + pagePath + '/index.md');
+        } else if (fs.existsSync(pagePath)) {
+          let response;
+          if (!force) {
+            response = await prompts({
+              type: 'confirm',
+              name: 'value',
+              message: 'Delete ' + pagePath + ' ?'
+            });
+          }
 
-        if (force || response.value) {
-          fse.removeSync(pagePath);
-          console.log('Removed folder: ' + pagePath);
+          if (force || response.value) {
+            fse.removeSync(pagePath);
+            console.log('Removed folder: ' + pagePath);
+          }
         }
       }
     }
