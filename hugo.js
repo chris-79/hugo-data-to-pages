@@ -43,9 +43,11 @@ const build = async (add, force) => {
 
         const pagePath = config.root + config.contentPath + '/' + pages[j].slug;
         if (add) {
-          fse.ensureDirSync(pagePath);
-          fs.writeFileSync(pagePath + '/index.md', JSON.stringify(pages[j]) + '\n');
-          console.log('Created file: ' + pagePath + '/index.md');
+          //fse.ensureDirSync(pagePath);
+          fs.writeFileSync(pagePath + '.md', JSON.stringify(pages[j]) + '\n');
+          console.log('Created file: ' + pagePath + '.md');
+          fs.writeFileSync(pagePath + '.json', JSON.stringify(pages[j]) + '\n');
+          console.log('Created file: ' + pagePath + '.json');
         } else if (fs.existsSync(pagePath)) {
           let response;
           if (!force) {
