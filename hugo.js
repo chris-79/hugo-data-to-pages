@@ -33,11 +33,11 @@ const build = async (add, force) => {
     return console.log('e', e);
   }
   if (dataFiles.length < 1) return console.log('No data files');
-  console.log("dataFiles:");
-  console.log(dataFiles);
   for (let i in dataFiles) {
     if (dataFiles[i].includes(config.pages)) {
       let pages = converToObject(dataFiles[i]);
+      console.log("pages:");
+      console.log(pages);
       for (let j in pages) {
         if (!pages[j]) return console.log('Error: Pages must include fields!');
         if (!pages[j].slug) return console.log('Error: Pages must include slug!');
