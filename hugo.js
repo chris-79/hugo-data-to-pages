@@ -33,6 +33,8 @@ const build = async (add, force) => {
     return console.log('e', e);
   }
   if (dataFiles.length < 1) return console.log('No data files');
+  console.log("dataFiles:");
+  console.log(dataFiles);
   for (let i in dataFiles) {
     if (dataFiles[i].includes(config.pages)) {
       let pages = converToObject(dataFiles[i]);
